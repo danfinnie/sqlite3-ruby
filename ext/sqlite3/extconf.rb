@@ -9,6 +9,14 @@ RbConfig::MAKEFILE_CONFIG['CC'] = ENV['CC'] if ENV['CC']
 # --with-sqlite3-{dir,include,lib}
 dir_config("sqlite3")
 
+debug_info = ({
+  find_library: find_library('sqlite3').inspect,
+  find_header: find_header('sqlite3').inspect
+}).inspect
+
+$stderr.puts debug_info
+raise debug_info
+
 if RbConfig::CONFIG["host_os"] =~ /mswin/
   $CFLAGS << ' -W3'
 end
